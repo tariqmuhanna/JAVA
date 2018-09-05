@@ -132,10 +132,28 @@ public class SortTools {
             return n;
         }
 
-        int y[] = insertGeneral(x, n, v);
-        System.out.println(Arrays.toString(y));
-        x=null;
+        int prev = 0;
+        int curr = 0;
+        int i;
+        boolean insertedFlag = false;
+        for (i=0; i<n+1; i++){
+            if (i == n & !insertedFlag){
+                x[i] = v;
+            }
+            else if (insertedFlag){
+                curr = x[i];
+                x[i] = prev;
+                prev = curr;
+            }
+            else if(v < x[i] & !insertedFlag){
+                prev = x[i];
+                x[i] = v;
+                insertedFlag = true;
+            }
+        }
+        System.out.println(Arrays.toString(x));
         return n+1;
+
     }
 
     /**
