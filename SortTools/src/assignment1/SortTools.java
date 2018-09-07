@@ -2,11 +2,11 @@
 /*
  * EE422C Project 1 submission by
  * Replace <...> with your actual data.
- * <Student Name>
- * <Student EID>
- * <5-digit Unique No.>
+ * Tariq Muhanna
+ * tim278
+ * 16345
  * Fall 2018
- * Slip days used:
+ * Slip days used: 0
  */
 
 package assignment1;
