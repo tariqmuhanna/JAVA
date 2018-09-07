@@ -151,7 +151,7 @@ public class SortTools {
                 insertedFlag = true;
             }
         }
-        System.out.println(Arrays.toString(x));
+//        System.out.println(Arrays.toString(x));
         return n+1;
 
     }
