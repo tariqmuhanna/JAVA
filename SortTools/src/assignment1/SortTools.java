@@ -164,9 +164,10 @@ public class SortTools {
     public static void insertSort(int[] x, int n){
         for (int i = 0; i < n-1; i++) {
             int min = i;
-            for (int j = i + 1; j < n;
-            j++)
-            if (x[j] < x[min])min = j;
+            for (int j = i + 1; j < n; j++)
+            if (x[j] < x[min])
+                min = j;
+
             int temp = x[i];
             x[i] = x[min];
             x[min] = temp;
