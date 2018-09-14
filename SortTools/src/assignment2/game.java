@@ -9,20 +9,66 @@ public class game {
         String code = SecretCodeGenerator.getInstance().getNewSecretCode();
         System.out.println(code);
 
-        Scanner kb = new Scanner(System.in);
-        System.out.println("You have " + GameConfiguration.guessNumber + ", please enter your guess: ");
-        String readString = kb.nextLine();
-
         String[] feedback = new String[12];
         String[] answerList = new String[12];
-        for(int i=0; i < GameConfiguration.guessNumber; i++) {
-            answerList[i] = readString;
-            feedback[i] = wordComparison(code, readString);
-            printFeedback(i, answerList, feedback);
+        int turnsLeft = GameConfiguration.guessNumber;
 
+        Scanner kb = new Scanner(System.in);
+        String readString;
+
+        System.out.println("Welcome to Mastermind.");
+        System.out.println("Do you want to play a new game? (Y/N):");
+        readString = kb.nextLine();
+        System.out.println();
+        while (readString.equals("Y")){
+
+            for (int i = 0; i < GameConfiguration.guessNumber; i++) {
+                System.out.println("You have " + (turnsLeft-i) + " guess(es) left.");
+                System.out.println("Enter guess:");
+                readString = kb.nextLine();
+
+                if (readString.equals("HISTORY"))
+                    printFeedback(i--, answerList, feedback);
+
+                else if (!checkUserGuess(readString))
+                    i--;
+
+                else {
+                    answerList[i] = readString;
+                    feedback[i] = wordComparison(code, readString);
+                    if (readString.equals(code)){
+                        System.out.println(answerList[i] + " -> " + feedback[i]);
+                        System.out.println("You win!");
+                        System.out.println();
+                        break;
+                    }
+                    System.out.println(answerList[i] + " -> " + feedback[i]);
+                    System.out.println();
+                }
+            }
+            if (!readString.equals(code))
+                System.out.println("You lose! The pattern was " + code);
+            System.out.println();
+            System.out.println("Do you want to play a new game? (Y/N)");
+            readString = kb.nextLine();
         }
-        //System.out.println(wordComparison(code, readString));
 
+        kb.close();
+    }
+
+    public static Boolean checkUserGuess(String guess){
+        for (int i = 0; i < guess.length(); i++) {
+            if(guess.charAt(i) <= 65 | guess.charAt(i) >= 91){
+                System.out.println("INVALID_GUESS\n");
+                return false;
+            }
+        }
+
+        if (guess.length() != 4) {
+            System.out.println("INVALID_GUESS\n");
+            return false;
+        }
+        return true;
     }
 
     public static String wordComparison(String ans, String word){
@@ -34,9 +80,6 @@ public class game {
             if(ans.charAt(i) == word.charAt(i))
                 black++;
         }
-//        System.out.print("b: ");
-//        System.out.print(black);
-
 
         for (int i=0; i < 4; i++){  // Goes through answer string
 
@@ -58,15 +101,16 @@ public class game {
             }
             completedFlag = false;  // Resets flag
         }
-//        System.out.print(" w: ");
-//        System.out.print(white);
-        String s = black + "b_" + "w" + white;
+
+        String s = black + "b_" + white + "w";
         return s;
     }
-    public static void printFeedback(int iterations, String[] fd, String[] ans){
-        for (int i=0; i < iterations; i++){
 
+    public static void printFeedback(int iterations, String[] ans, String[] fd){
+        for (int i=0; i < iterations; i++){
+            System.out.println(ans[i] + " -> " + fd[i]);
         }
+        System.out.println();
 
     }
 }
