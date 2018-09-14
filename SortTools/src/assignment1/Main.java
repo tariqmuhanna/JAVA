@@ -21,9 +21,9 @@ public class Main {
         System.out.println(Arrays.toString(z));
         int[] a = {1,2,3,4,5,6,8,9,10};
         System.out.println(Arrays.toString(SortTools.insertGeneral(a, a.length, 7)));
-        int[] b = {1,2,3,4,5,6,8,9,10};
+        int[] b = {1,2,3,4,5,6,7,8,10};
         System.out.println("insert");
-        SortTools.insertInPlace(b,b.length-1,7);
+        SortTools.insertInPlace(b,b.length-1,1);
 
         int[]c = {20,2,98,4,17,6,8,34,10};
         SortTools.insertSort(c ,c.length);
